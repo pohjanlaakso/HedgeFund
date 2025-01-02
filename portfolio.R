@@ -4,6 +4,9 @@ rm(list=ls()) # empty environment
 setwd(getwd()) # set working directory
 library(tidyquant) # getSymbols()
 
+# access other R-files
+source('functions.R')
+
 # download data and visualize
 getSymbols('QQQ'); plot(QQQ$QQQ.Close) # Nasdaq 100
 getSymbols('VCLT'); plot(VCLT$VCLT.Close) # Long-term corporate bonds
