@@ -1,3 +1,4 @@
 
-rm(list=ls())
-setwd(getwd())
+# Mise en place
+rm(list=ls()) # empty environment
+setwd(getwd()) # set working directory
