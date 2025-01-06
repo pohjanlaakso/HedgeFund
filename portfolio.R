@@ -22,5 +22,15 @@ rlog_equity <- log(QQQ$QQQ.Close) - log(lag(QQQ$QQQ.Close, k=1)); rlog_equity <-
 rlog_bond <- log(VCLT$VCLT.Close) - log(lag(VCLT$VCLT.Close, k=1)); rlog_bond <- na.omit(rlog_bond); plot(rlog_bond)
 rlog_bond2 <- log(FALN$FALN.Close) - log(lag(FALN$FALN.Close, k=1)); rlog_bond2 <- na.omit(rlog_bond2); plot(rlog_bond2)
 
+# annualized geometric returns: https://stackoverflow.com/questions/2602583/geometric-mean-is-there-a-built-in
+geomean_equity <- exp(mean(log(1+r_equity)))^252-1 # annualisation
+geomean_bond <- exp(mean(log(1+r_bond)))^252-1
+geomean_bond2 <- exp(mean(log(1+r_bond2)))^252-1
+
+# testing 
+gmean_test(r_equity, rlog_equity)
+
+pvar <- portfolio_variance(rlog_equity, rlog_bond, 0.6, 0.4)
+pvar2 <- portfolio_variance(rlog_equity, rlog_bond2, 0.6, 0.4)
 
 
