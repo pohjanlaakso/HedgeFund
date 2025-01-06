@@ -6,6 +6,7 @@ library(tidyquant) # getSymbols()
 
 # access other R-files
 source('functions.R')
+source('fama_french.R')
 
 # download data and visualize
 getSymbols('QQQ'); plot(QQQ$QQQ.Close) # Nasdaq 100
@@ -30,7 +31,17 @@ geomean_bond2 <- exp(mean(log(1+r_bond2)))^252-1
 # testing 
 gmean_test(r_equity, rlog_equity)
 
+# portfolio variance
 pvar <- portfolio_variance(rlog_equity, rlog_bond, 0.6, 0.4)
 pvar2 <- portfolio_variance(rlog_equity, rlog_bond2, 0.6, 0.4)
 
+# expected return
+expected_return <- 0.6 * geomean_equity + 0.4 * geomean_bond
+expected_return2 <- 0.6 * geomean_equity + 0.4 * geomean_bond2
 
+# risk-free rate
+rf_rate <- ( 1 + median(data$RF)/100 )^12-1 # calculate an annual long term average from monthly data
+
+# portfolio Sharpe ratio
+psharpe <- portfolio_sharpe(rf_rate, pvar, expected_return)
+psharpe2 <- portfolio_sharpe(rf_rate, pvar2, expected_return2)
