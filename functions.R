@@ -33,7 +33,14 @@ portfolio_variance <- function(vector_a, vector_b, weight_a, weight_b) {
   return(sqrt(pvar)*sqrt(252)) # annualisation
 }
 
-portfolio_sharpe <- function(rf_rate, portfolio_sd, portfolio_return) {
-  return( (portfolio_return-rf_rate)/portfolio_sd )
+# multiasset portfolio variance
+multiasset_portfolio_variance <- function(return_matrix, weight_vector) {
+  weight_vector <- as.matrix(weight_vector)
+  covariance_matrix <- cov(return_matrix)
+  por_var <- t(weight_vector) %*% covariance_matrix %*% weight_vector
+  return(as.numeric(por_var))
 }
 
+portfolio_sharpe <- function(rf_rate, portfolio_sd, portfolio_return) {
+  return((portfolio_return-rf_rate)/portfolio_sd)
+}
