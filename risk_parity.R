@@ -10,6 +10,13 @@ commodities <- getSymbols('GD=F', auto.assign = F)
 colnames(commodities) <- c('Open', 'High', 'Low', 'Close', 'Volume', 'Adjusted')
 plot(commodities$Close)
 
+# Nasdaq crypto index
+getSymbols('BTC-USD') # weight 73.2
+getSymbols('ETH-USD') # w  16.5
+getSymbols('SOL-USD') # w 5.3
+getSymbols('XRP-USD') # w 2.2
+getSymbols('ADA-USD') # w 1.1
+
 # simple returns
 r_commodities <- commodities$Close / lag(commodities$Close, k=1)-1
 r_commodities <- na.omit(r_commodities)
