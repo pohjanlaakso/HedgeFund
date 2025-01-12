@@ -14,10 +14,18 @@ log_return <- function(vector) {
   return(list(a=a, b=b))
 }
 
+# tests (at some point put into a different 'test-file.R')
 gmean_test <- function(raw_return_vector, log_return_vector){
   a <- exp(mean(log(1+raw_return_vector)))
   b <- exp(mean(log_return_vector))
   return (a-b) # should always return zero
+}
+
+# test input is data frame or matrix
+input_test <- function(df) {
+  if(!is.data.frame(df) && !is.matrix(df)) {
+    stop('Input must be a data frame or a matrix.')
+  }
 }
 
 # portfolio correlation

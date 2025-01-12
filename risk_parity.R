@@ -41,8 +41,40 @@ input_test <- function(df) {
   }
 }
 
-inverse_volatility_weight <- function() {
-  
+volatility_window <- function(df, period_length) {
+  rollapply(df, width = period_length, FUN = sd, fill = NA, align = 'right')
 }
+
+# volatility and inverse volatility for simple returns
+simple_return_volatility <- volatility_window(simple_return_portfolio, period_length = (36*(252/12)))
+simple_return_volatility <- na.omit(simple_return_volatility)
+simpleReturn_inverseVolatility <- 1/simple_return_volatility
+
+# visual check A
+plot(simple_return_volatility$QQQ.Close, ylim = c(0, 0.02), col = 'red', type = 'l')
+lines(simple_return_volatility$VCLT.Close, col = 'green')
+lines(simple_return_volatility$Close, col = 'blue')
+#legend('topleft', legend = c('A', 'B', 'C'), col = c('red', 'green', 'blue'), lty = 1)
+
+# visual check B
+plot(simpleReturn_inverseVolatility$QQQ.Close, col = 'red', ylim = c(50, 230))
+lines(simpleReturn_inverseVolatility$VCLT.Close, col = 'green')
+lines(simpleReturn_inverseVolatility$Close, col = 'blue')
+
+# volatility and inverse volatility for log returns.
+log_return_volatility <- volatility_window(log_return_portfolio, period_length = (36*(252/12)))
+log_return_volatility <- na.omit(log_return_volatility)
+logReturn_inverseVolatility <- 1/log_return_volatility
+
+# visual check A --> no change between simple and log returns.
+plot(log_return_volatility$QQQ.Close, ylim = c(0, 0.02), col = 'red', type = 'l')
+lines(log_return_volatility$VCLT.Close, col = 'green')
+lines(log_return_volatility$Close, col = 'blue')
+#legend('topleft', legend = c('A', 'B', 'C'), col = c('red', 'green', 'blue'), lty = 1)
+
+# visual check B --> no change between simple and log returns.
+plot(logReturn_inverseVolatility$QQQ.Close, col = 'red', ylim = c(50, 230))
+lines(logReturn_inverseVolatility$VCLT.Close, col = 'green')
+lines(logReturn_inverseVolatility$Close, col = 'blue')
 
 ####
