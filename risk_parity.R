@@ -100,4 +100,10 @@ complex_portfolio_variance <- function(weights_df, returns_df) {
   return (pvar_df)
 }
 
+# test if these things even work
 test_abc <- complex_portfolio_variance(weights, returns)
+plot(sqrt(test_abc) * sqrt(252), type = 'l', ylim = c(0.1, 0.12)) # variance to volatility and daily to annual
+
+# calculate risk parity portfolio Sharpe
+# calculate RP returns
+# visual check for RP portfolio vs 60/40
