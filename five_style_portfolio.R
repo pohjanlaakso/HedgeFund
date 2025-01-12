@@ -14,4 +14,5 @@
 # maybe these two should play into the defensive strategy as well?
 
 source('Portfolio.R')
+source('shiller_installer.R')
 
