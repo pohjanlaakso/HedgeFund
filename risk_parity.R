@@ -77,4 +77,13 @@ plot(logReturn_inverseVolatility$QQQ.Close, col = 'red', ylim = c(50, 230))
 lines(logReturn_inverseVolatility$VCLT.Close, col = 'green')
 lines(logReturn_inverseVolatility$Close, col = 'blue')
 
+# calculate weights
+weights <- t(apply(simpleReturn_inverseVolatility, 1, function(row) row / sum(row, na.rm = TRUE)))
+weights <- as.data.frame(weights)
+
+# visual check
+plot(weights$QQQ.Close, type = 'l', col = 'red', ylim = c(0.2, 0.6))
+lines(weights$VCLT.Close, col = 'green')
+lines(weights$Close, col = 'blue')
+
 ####
