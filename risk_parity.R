@@ -24,8 +24,6 @@ plot(rlog_commodities)
 geomean_commodities <- exp(mean(log(1+r_commodities)))^252-1
 gmean_test(r_commodities, rlog_commodities)
 
-#### portfolio variance ####
-
 # data frame: simple returns
 simple_return_portfolio <- cbind(r_equity, r_bond, r_commodities)
 simple_return_portfolio <- na.omit(simple_return_portfolio)
@@ -85,5 +83,21 @@ weights <- as.data.frame(weights)
 plot(weights$QQQ.Close, type = 'l', col = 'red', ylim = c(0.2, 0.6))
 lines(weights$VCLT.Close, col = 'green')
 lines(weights$Close, col = 'blue')
+grid()
 
-####
+# portfolio variance
+returns <- tail(simple_return_portfolio, -(36*(252/12))+1)
+
+complex_portfolio_variance <- function(weights_df, returns_df) {
+  pvar_df <- numeric(nrow(weights_df)) # initialize daily portfolio variance vector
+  
+  for(i in seq_len(nrow(weights_df))) {
+    w <- as.numeric(weights_df[i, ])
+    r <- returns_df
+    cov_matrix <- cov(r)
+    pvar_df[i] <- t(w) %*% cov_matrix %*% w
+  }
+  return (pvar_df)
+}
+
+test_abc <- complex_portfolio_variance(weights, returns)
