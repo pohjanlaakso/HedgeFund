@@ -10,7 +10,7 @@ commodities <- getSymbols('GD=F', auto.assign = F)
 colnames(commodities) <- c('Open', 'High', 'Low', 'Close', 'Volume', 'Adjusted')
 plot(commodities$Close)
 
-# Nasdaq crypto index
+# Nasdaq crypto indexx
 getSymbols('BTC-USD') # weight 73.2
 getSymbols('ETH-USD') # w  16.5
 getSymbols('SOL-USD') # w 5.3
