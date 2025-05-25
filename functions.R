@@ -43,9 +43,16 @@ portfolio_variance <- function(vector_a, vector_b, weight_a, weight_b) {
 
 # multiasset portfolio variance
 multiasset_portfolio_variance <- function(return_matrix, weight_vector) {
+  return_matrix <- as.matrix(return_matrix)
   weight_vector <- as.matrix(weight_vector)
+  
+  if(ncol(return_matrix) != length(weight_vector)) {
+    stop("Number of columns in return matrix must match length of weight vector.")
+  }
+  
   covariance_matrix <- cov(return_matrix)
   por_var <- t(weight_vector) %*% covariance_matrix %*% weight_vector
+  por_var <- sqrt(por_var * 252)
   return(as.numeric(por_var))
 }
 
