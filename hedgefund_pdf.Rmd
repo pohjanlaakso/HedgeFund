@@ -1,0 +1,39 @@
+---
+title: "Hedge Fund"
+author: "Tatu Pohjanlaakso"
+date: "2025-05-18"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+source('portfolio.R')
+```
+
+```{r}
+cor(returns_aligned)
+```
+
+```{r}
+plot(cumprod(1+rlog_equity), col ='blue', lty=2, ylim = c(0,13))
+lines(cumprod(1+rlog_bond), col = 'purple', lty = 5)
+lines(cumprod(1+(0.6*rlog_equity+0.4*rlog_bond)), col = 'red', lty = 6)
+lines(cumprod(1+2*(0.6*rlog_equity+0.4*rlog_bond)), col = 'black', lty = 6)
+lines(cumprod(1+(0.6*rlog_equity+0.4*rlog_fallen)), col = 'yellow', lty = 7)
+lines(cumprod(1+2*(0.6*rlog_equity+0.4*rlog_fallen)), col = 'green', lty = 7)
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```

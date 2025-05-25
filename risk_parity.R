@@ -17,10 +17,13 @@ getSymbols('SOL-USD') # w 5.3
 getSymbols('XRP-USD') # w 2.2
 getSymbols('ADA-USD') # w 1.1
 
+# add REITS, Emerging markets, and EAFE
+
 # simple returns
 r_commodities <- commodities$Close / lag(commodities$Close, k=1)-1
 r_commodities <- na.omit(r_commodities)
 plot(r_commodities)
+
 
 # log returns
 rlog_commodities <- log(commodities$Close) - log(lag(commodities$Close, k=1))

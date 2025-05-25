@@ -13,8 +13,8 @@ data <- read_excel(temp, sheet = 5, skip = 7)
 plot(data$P, type = 'l')
 plot(data$E, type = 'l')
 plot(data$D, type = 'l')
-plot(data$CAPE, type = 'l')
-
+plot(data$CAPE, type = 'l'); 
+plot(1/as.numeric(data$CAPE), type = 'l') # inverse CAPE, or CAPE yield
 
 
 
