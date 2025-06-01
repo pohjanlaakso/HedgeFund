@@ -14,6 +14,23 @@ log_return <- function(vector) {
   return(list(a=a, b=b))
 }
 
+return_f <- function(series) {
+  return (na.omit(
+    series / lag(series, k=1) -1
+  ))
+}
+
+logreturn_f <- function(series) {
+  return(na.omit(
+    log(series) - log(lag(series, k = 1))
+  ))
+}
+
+# geomean function
+geomean_f <- function(returns) {
+  return(exp(mean(log(1+returns)))^252-1)
+}
+
 # tests (at some point put into a different 'test-file.R')
 gmean_test <- function(raw_return_vector, log_return_vector){
   a <- exp(mean(log(1+raw_return_vector)))
